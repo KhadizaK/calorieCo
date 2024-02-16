@@ -10,8 +10,8 @@ def sayHello(request):
   username = request.POST.get('text1', '')
   calorieDB.firstName = username
   calorieDB.title = "test1"
+  calorieInput = request.POST.get('calorieInput', 0) # get the calorie input from the request
+  calorieDB.calorieInput = calorieInput # assign it to the model instance
   calorieDB.save()
   names = calorie.objects.all()
-  # return render(request, 'home.html', {'name': calorie.objects.all()[0].firstName})
-  # return render(request, 'home.html', {'name': username})
-  return render(request, 'home.html', {'names': names, 'username': username})
+  return render(request, 'home.html', {'names': names, 'username': username, 'calorieInput': calorieInput})

@@ -7,27 +7,30 @@
   </head>
   <body>
     <div class="mail">
-      <h2>Input your Name and Submit</h2>
+      <h2>Input your Name and Calories, then Submit!</h2>
       <p>Hello, {{ username }}!</p>
+      <p>My Calorie Consumption {{calorieInput}}</p>
       <h2>All the Names in the Database</h2>
       <ul>
         {% for name in names %}
-          <li>{{ name.firstName }}</li>
+          <li>{{ name.firstName }} {{name.calorieInput}}</li>
         {% endfor %}
       </ul>
-      <form name="form1"  method="POST" action="{% url 'sayHello' %}" onclick="required()">
+      <form name="form1"  method="POST" action="{% url 'sayHello' %}" >
         <ul>
-        <li><input type='text' name ='text1' required/></li>
-        <li class="rq">*Required Field</li>
-        <li><input type="submit" name="submit" value="Submit" /></li>
+          <input type='text' name ='text1' placeholder="Enter Name" required/>
+          <input type='number' name ='calorieInput' placeholder="Enter Calorie Consumption"/>
+          <p class="rq">*Required Field</p>
+          <input type="submit" value="Submit" onclick="required()"/>
         </ul>
       </form>
     </div>
     <script>
       function required()
       {
-        var empt = document.forms["form1"]["text1"].value;
-        if (empt == "")
+        var emptName = document.forms["form1"]["text1"].value;
+        var emptCal = document.forms["form1"]["calorieInput"].value;
+        if (emptName == "" && emptCal == 0)
         {
           alert("Please input a Value");
           return false;
